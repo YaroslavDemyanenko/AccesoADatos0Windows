@@ -1,4 +1,4 @@
-package AccesoADatos0Windows;
+package lectores;
 
 import java.io.BufferedReader;
 import java.io.File;
