@@ -55,12 +55,14 @@ public class Controlador {
 		switch (numero) {
 		case 0:
 			System.exit(0);
+			break;
 		case 1:
-			
+			break;
 		case 2:
 			lectorCsv.setRecords(lectorCsv.cargarCsv("MOCK_DATA.csv"));
 			lectorCsv.setCampos(lectorCsv.cargarCamposCsv());
 			System.out.println(lectorCsv.leerPosicion(5));
+			break;
 		case 3:
 		}
 		return true;
