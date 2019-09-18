@@ -18,9 +18,24 @@ public class Buscador {
 			if (f.isDirectory())
 				verArchivos(f,sufijo);
 			if (f.isFile() && (f.getName().substring(f.getName().length()-sufijo.length())).equals(sufijo)) {
-				System.out.println(f.getName());
+				System.out.println(f.getName().substring(0,f.getName().length()-sufijo.length()));
 			}
 		}
+	}
+	
+	public String buscarArchivo(File directorioActual, String nombre, String sufijo) {
+		if (directorioActual == null) {
+			directorioActual = new File(".");
+		}
+		File[] filesList = directorioActual.listFiles();
 
+		for (File f : filesList) {
+			if (f.isDirectory())
+				return buscarArchivo(f,nombre,sufijo);
+			if (f.isFile() && (f.getName().equals(nombre+sufijo))) {
+				return f.getAbsolutePath();
+			}
+		}
+		return null;
 	}
 }
