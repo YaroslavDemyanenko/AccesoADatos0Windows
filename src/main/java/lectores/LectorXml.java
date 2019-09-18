@@ -14,7 +14,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class LectorXml {
 
-	public static void leerXml(String path) {
+	public void leerXml(String path) {
 		try {
     		
             SAXParserFactory factory = SAXParserFactory.newInstance();

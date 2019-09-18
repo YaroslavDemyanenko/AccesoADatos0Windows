@@ -13,12 +13,14 @@ public class Controlador {
 	private Buscador buscador;
 	private LectorCsv lectorCsv;
 	private LectorTxt lectorTxt;
+	private LectorXml lectorXml;
 	
 	
 	public Controlador() {
 		lector = new Scanner(System.in);
 		lectorCsv = new LectorCsv();
 		lectorTxt=new LectorTxt();
+		lectorXml=new LectorXml();
 		buscador= new Buscador();
 	}
 	
@@ -84,13 +86,12 @@ public class Controlador {
 			lectorCsv.leerCsv();
 			break;
 		case 3:
-
-			path = "\\Users\\IN1DM3B_22\\Documents\\datos.xml";
-			LectorXml.leerXml(path);
-
-			buscador.verArchivos(null,".xml");
+			sufijo=".xml";
+			buscador.verArchivos(null,sufijo);
+			nombre=elegirArchivo(sufijo);
+			path=buscador.buscarArchivo(null,nombre,sufijo);
+			lectorXml.leerXml(path);
 			break;
-
 		}
 		return true;
 	}
