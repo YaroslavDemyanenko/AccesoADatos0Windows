@@ -6,12 +6,14 @@ import java.util.Scanner;
 import buscador.Buscador;
 import lectores.LectorCsv;
 import lectores.LectorTxt;
+import lectores.LectorXml;
 
 public class Controlador {
 	private Scanner lector;
 	private Buscador buscador;
 	private LectorCsv lectorCsv;
 	private LectorTxt lectorTxt;
+	
 	
 	public Controlador() {
 		lector = new Scanner(System.in);
@@ -82,8 +84,13 @@ public class Controlador {
 			lectorCsv.leerCsv();
 			break;
 		case 3:
+
+			path = "\\Users\\IN1DM3B_22\\Documents\\datos.xml";
+			LectorXml.leerXml(path);
+
 			buscador.verArchivos(null,".xml");
 			break;
+
 		}
 		return true;
 	}
