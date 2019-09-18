@@ -14,52 +14,62 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class LectorXml {
 
-	public static void leerXml(String path) {
+	public void leerXml(String path) {
 		try {
     		
-            SAXParserFactory factory = SAXParserFactory.newInstance();
-            SAXParser saxParser = factory.newSAXParser();
+            SAXParserFactory parserFactory = SAXParserFactory.newInstance();
+            SAXParser saxParser = parserFactory.newSAXParser();
 
             DefaultHandler handler = new DefaultHandler() {
 
-                boolean bNombre = false;
-                boolean bUsername = false;
-                boolean bPassword = false;
+            	boolean bTitulo = false;
+                boolean bAutor = false;
+                boolean bGenero = false;
+                boolean bDescripcion = false;
 
                 public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
                 	
-            		if (qName.equalsIgnoreCase("empleado")) {
+            		if (qName.equalsIgnoreCase("libro")) {
             			String id = attributes.getValue("id");
             			System.out.println("id: " + id);
             		}
-					            		
-					if (qName.equalsIgnoreCase("nombre")) {
-					    bNombre = true;
+            		
+            		if (qName.equalsIgnoreCase("titulo")) {
+						bTitulo = true;
 					}
-					
-					if (qName.equalsIgnoreCase("username")) {
-					    bUsername = true;
+            		
+					if (qName.equalsIgnoreCase("autor")) {
+						bAutor = true;
 					}
 
-					if (qName.equalsIgnoreCase("password")) {
-					    bUsername = true;
+					if (qName.equalsIgnoreCase("genero")) {
+						bGenero = true;
+					}
+					
+					if (qName.equalsIgnoreCase("descripcion")) {
+						bDescripcion = true;
 					}
 				}
 					
 				public void characters(char ch[], int start, int length) throws SAXException {
-					    if (bNombre) {
-					        System.out.println("nombre: " + new String(ch, start, length));
-					        bNombre = false;
+					    
+					    if (bTitulo) {
+					    	System.out.println("Titulo: " + new String(ch, start, length));
+					    	bTitulo = false;
+					    }
+					    
+					    if (bAutor) {
+					        System.out.println("Autor: " + new String(ch, start, length));
+					        bAutor = false;
 					    }
 					
-					    if (bUsername) {
-					    	System.out.println("username: " + new String(ch, start, length));
-					    	bUsername = false;
-					    }
-					
-					    if (bPassword) {
-					    	System.out.println("password: " + new String(ch, start, length));
-					        bPassword = false;
+					    if (bGenero) {
+					    	System.out.println("Genero: " + new String(ch, start, length));
+					    	bGenero = false;
+				        }
+					    if (bDescripcion) {
+					    	System.out.println("Descripcion: " + new String(ch, start, length));
+					    	bDescripcion = false;
 				        }
 				    }
 					
