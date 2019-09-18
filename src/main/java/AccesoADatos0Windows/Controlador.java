@@ -3,15 +3,18 @@ package AccesoADatos0Windows;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import buscador.Buscador;
 import lectores.LectorCsv;
 
 public class Controlador {
 	private Scanner lector;
+	private Buscador buscador;
 	private LectorCsv lectorCsv;
 	
 	public Controlador() {
 		lector = new Scanner(System.in);
 		lectorCsv = new LectorCsv();
+		buscador= new Buscador();
 	}
 	
 	public void menu() {
@@ -57,13 +60,17 @@ public class Controlador {
 			System.exit(0);
 			break;
 		case 1:
+			buscador.verArchivos(null,".txt");
 			break;
 		case 2:
+			buscador.verArchivos(null,".csv");
 			lectorCsv.setRecords(lectorCsv.cargarCsv("MOCK_DATA.csv"));
 			lectorCsv.setCampos(lectorCsv.cargarCamposCsv());
 			System.out.println(lectorCsv.leerPosicion(5));
 			break;
 		case 3:
+			buscador.verArchivos(null,".xml");
+			break;
 		}
 		return true;
 	}
