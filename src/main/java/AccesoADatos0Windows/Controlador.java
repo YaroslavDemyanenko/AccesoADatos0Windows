@@ -4,10 +4,12 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import lectores.LectorCsv;
+import lectores.LectorXml;
 
 public class Controlador {
 	private Scanner lector;
 	private LectorCsv lectorCsv;
+	
 	
 	public Controlador() {
 		lector = new Scanner(System.in);
@@ -64,6 +66,8 @@ public class Controlador {
 			System.out.println(lectorCsv.leerPosicion(5));
 			break;
 		case 3:
+			String path = "\\Users\\IN1DM3B_22\\Documents\\datos.xml";
+			LectorXml.leerXml(path);
 		}
 		return true;
 	}

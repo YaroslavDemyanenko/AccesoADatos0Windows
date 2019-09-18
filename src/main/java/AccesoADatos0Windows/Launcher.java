@@ -17,6 +17,7 @@ public class Launcher {
 		lectorPrueba.resumenLectura();
 		System.out.println(lectorPrueba.leerPosicion(5));
 		
+		
 		//UZTA
 		LectorTxt ltxt = new LectorTxt(); 
 		try {
