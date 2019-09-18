@@ -17,7 +17,7 @@ public class LectorCsv {
 		records = new ArrayList<>();
 	}
 	
-	public List<List<String>> leerCsv(String path) {
+	public List<List<String>> cargarCsv(String path) {
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
@@ -31,9 +31,12 @@ public class LectorCsv {
 		}
 		return records;
 	}
+	
+	public List<String> cargarCamposCsv(){
+		return records.get(0);
+	}
 
 	public void resumenLectura() {
-		campos=records.get(0);
 		StringBuilder builder=new StringBuilder();
 		builder.append("Se han leido "+(records.size()-1)+" lineas\nLos campos son: ");
 		for (int i=0;campos.size()>i;i++) {
@@ -46,7 +49,7 @@ public class LectorCsv {
 	public String leerPosicion(int numero) {
 		StringBuilder builder=new StringBuilder();
 		for(int i=0;i<campos.size();i++) {
-			builder.append(campos.get(i)+": "+records.get(5).get(i)+"\n");
+			builder.append(campos.get(i)+": "+records.get(numero).get(i)+"\n");
 		}
 		return builder.toString();
 	}
@@ -58,5 +61,13 @@ public class LectorCsv {
 
 	public void setRecords(List<List<String>> records) {
 		this.records = records;
+	}
+
+	public List<String> getCampos() {
+		return campos;
+	}
+
+	public void setCampos(List<String> campos) {
+		this.campos = campos;
 	}
 }
