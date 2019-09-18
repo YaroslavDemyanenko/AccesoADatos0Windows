@@ -70,9 +70,34 @@ public class LectorTxt {
     }
     
     //Metodo para leer el contenido del archivo
-    public List<List<String>> LeerTxt(){
-		return null;
-    	
+    public void leer(String nombreArchivo){    
+        try {
+			// Apertura del fichero y creacion de BufferedReader para poder
+			// hacer una lectura comoda (disponer del metodo readLine()).
+			f = new File ("archivo.txt");
+			fr = new FileReader (f);
+			bf = new BufferedReader(fr);
+
+			// Lectura del fichero
+			System.out.println("Leyendo el contendio del archivo.txt");
+			String linea;
+			while((linea=bf.readLine())!=null)
+				System.out.println(linea);
+        }
+        catch(Exception e){
+           e.printStackTrace();
+        }finally{
+           // En el finally cerramos el fichero, para asegurarnos
+           // que se cierra tanto si todo va bien como si salta 
+           // una excepcion.
+           try{
+              if( null != fr ){
+                 fr.close();
+              }
+           }catch (Exception e2){
+              e2.printStackTrace();
+           }
+        }
     }
    
 }
