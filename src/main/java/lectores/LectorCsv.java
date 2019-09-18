@@ -10,11 +10,11 @@ import java.util.List;
 
 public class LectorCsv {
 
-	private List<List<String>> records;
+	private List<List<String>> registro;
 	private List<String> campos;
 	
 	public LectorCsv() {
-		records = new ArrayList<>();
+		registro = new ArrayList<>();
 	}
 	
 	public List<List<String>> cargarCsv(String path) {
@@ -22,23 +22,29 @@ public class LectorCsv {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		        String[] values = line.split(",");
-		        records.add(Arrays.asList(values));
+		        registro.add(Arrays.asList(values));
 		    }
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return records;
+		return registro;
 	}
 	
 	public List<String> cargarCamposCsv(){
-		return records.get(0);
+		return registro.get(0);
+	}
+	
+	public void leerCsv() {
+		for(List<String> linea: registro) {
+			System.out.println(linea.toString());
+		}
 	}
 
 	public void resumenLectura() {
 		StringBuilder builder=new StringBuilder();
-		builder.append("Se han leido "+(records.size()-1)+" lineas\nLos campos son: ");
+		builder.append("Se han leido "+(registro.size()-1)+" lineas\nLos campos son: ");
 		for (int i=0;campos.size()>i;i++) {
 			builder.append(campos.get(i)+", ");
 		}
@@ -49,18 +55,18 @@ public class LectorCsv {
 	public String leerPosicion(int numero) {
 		StringBuilder builder=new StringBuilder();
 		for(int i=0;i<campos.size();i++) {
-			builder.append(campos.get(i)+": "+records.get(numero).get(i)+"\n");
+			builder.append(campos.get(i)+": "+registro.get(numero).get(i)+"\n");
 		}
 		return builder.toString();
 	}
 	
 	
-	public List<List<String>> getRecords() {
-		return records;
+	public List<List<String>> getRegistro() {
+		return registro;
 	}
 
-	public void setRecords(List<List<String>> records) {
-		this.records = records;
+	public void setRegistro(List<List<String>> records) {
+		this.registro = records;
 	}
 
 	public List<String> getCampos() {

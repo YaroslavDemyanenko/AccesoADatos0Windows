@@ -5,15 +5,18 @@ import java.util.Scanner;
 
 import buscador.Buscador;
 import lectores.LectorCsv;
+import lectores.LectorTxt;
 
 public class Controlador {
 	private Scanner lector;
 	private Buscador buscador;
 	private LectorCsv lectorCsv;
+	private LectorTxt lectorTxt;
 	
 	public Controlador() {
 		lector = new Scanner(System.in);
 		lectorCsv = new LectorCsv();
+		lectorTxt=new LectorTxt();
 		buscador= new Buscador();
 	}
 	
@@ -55,18 +58,28 @@ public class Controlador {
 	}
 	
 	public boolean ejecutar(int numero) {
+		String path;
+		String sufijo;
+		String nombre;
 		switch (numero) {
 		case 0:
 			System.exit(0);
 			break;
 		case 1:
-			buscador.verArchivos(null,".txt");
+			sufijo=".txt";
+			buscador.verArchivos(null,sufijo);
+			nombre=elegirArchivo(sufijo);
+			path=buscador.buscarArchivo(null,nombre,sufijo);
+			lectorTxt.leer(path);
 			break;
 		case 2:
-			buscador.verArchivos(null,".csv");
-			lectorCsv.setRecords(lectorCsv.cargarCsv("MOCK_DATA.csv"));
+			sufijo=".csv";
+			buscador.verArchivos(null,sufijo);
+			nombre=elegirArchivo(sufijo);
+			path=buscador.buscarArchivo(null,nombre,sufijo);
+			lectorCsv.setRegistro(lectorCsv.cargarCsv(path));
 			lectorCsv.setCampos(lectorCsv.cargarCamposCsv());
-			System.out.println(lectorCsv.leerPosicion(5));
+			lectorCsv.leerCsv();
 			break;
 		case 3:
 			buscador.verArchivos(null,".xml");
@@ -74,4 +87,12 @@ public class Controlador {
 		}
 		return true;
 	}
+	
+	public String elegirArchivo(String sufijo) {
+		System.out.println("Introduce el nombre del archivo que quieres leer");
+		String nombre=lector.next();
+		return nombre;
+	}
+	
+	
 }
