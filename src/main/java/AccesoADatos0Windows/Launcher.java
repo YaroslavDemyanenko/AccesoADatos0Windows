@@ -5,10 +5,7 @@ public class Launcher {
 	public static void main(String[] args) {
 		 //JFILECHOSSER	
 		//YAROS
-		
 		Controlador contr=new Controlador();
-		
-		contr.menu();
 		
 		
 		/**

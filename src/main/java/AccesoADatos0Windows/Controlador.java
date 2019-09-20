@@ -22,6 +22,8 @@ public class Controlador {
 		lectorTxt=new LectorTxt();
 		lectorXml=new LectorXml();
 		buscador= new Buscador();
+		
+		menu();
 	}
 	
 	public void menu() {

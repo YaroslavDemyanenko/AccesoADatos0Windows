@@ -28,14 +28,14 @@ public class Buscador {
 			directorioActual = new File(".");
 		}
 		File[] filesList = directorioActual.listFiles();
-
+		String pathResultado="";
 		for (File f : filesList) {
 			if (f.isDirectory())
-				return buscarArchivo(f,nombre,sufijo);
+				pathResultado += buscarArchivo(f,nombre,sufijo);
 			if (f.isFile() && (f.getName().equals(nombre+sufijo))) {
 				return f.getAbsolutePath();
 			}
 		}
-		return null;
+		return pathResultado;
 	}
 }
