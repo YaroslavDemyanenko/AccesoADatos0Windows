@@ -14,18 +14,17 @@ public class Controlador {
 	private LectorCsv lectorCsv;
 	private LectorTxt lectorTxt;
 	private LectorXml lectorXml;
-	
-	
+
 	public Controlador() {
 		lector = new Scanner(System.in);
 		lectorCsv = new LectorCsv();
-		lectorTxt=new LectorTxt();
-		lectorXml=new LectorXml();
-		buscador= new Buscador();
-		
+		lectorTxt = new LectorTxt();
+		lectorXml = new LectorXml();
+		buscador = new Buscador();
+
 		menu();
 	}
-	
+
 	public void menu() {
 		System.out.println(menuString());
 		ejecutar(leerEleccion());
@@ -62,9 +61,9 @@ public class Controlador {
 		}
 		return num;
 	}
-	
+
 	public boolean ejecutar(int numero) {
-		String path;
+		String path = null;
 		String sufijo;
 		String nombre;
 		switch (numero) {
@@ -72,37 +71,49 @@ public class Controlador {
 			System.exit(0);
 			break;
 		case 1:
-			sufijo=".txt";
-			buscador.verArchivos(null,sufijo);
-			nombre=elegirArchivo(sufijo);
-			path=buscador.buscarArchivo(null,nombre,sufijo);
+			sufijo = ".txt";
+			buscador.verArchivos(null, sufijo);
+			while (!validarPath(path)) {
+				nombre = elegirArchivo(sufijo);
+				path = buscador.buscarArchivo(null, nombre, sufijo);
+			}
 			lectorTxt.leer(path);
 			break;
 		case 2:
-			sufijo=".csv";
-			buscador.verArchivos(null,sufijo);
-			nombre=elegirArchivo(sufijo);
-			path=buscador.buscarArchivo(null,nombre,sufijo);
+			sufijo = ".csv";
+			buscador.verArchivos(null, sufijo);
+			while (!validarPath(path)) {
+				nombre = elegirArchivo(sufijo);
+				path = buscador.buscarArchivo(null, nombre, sufijo);
+			}
 			lectorCsv.setRegistro(lectorCsv.cargarCsv(path));
 			lectorCsv.setCampos(lectorCsv.cargarCamposCsv());
 			lectorCsv.leerCsv();
 			break;
 		case 3:
-			sufijo=".xml";
-			buscador.verArchivos(null,sufijo);
-			nombre=elegirArchivo(sufijo);
-			path=buscador.buscarArchivo(null,nombre,sufijo);
+			sufijo = ".xml";
+			buscador.verArchivos(null, sufijo);
+			while (!validarPath(path)) {
+				nombre = elegirArchivo(sufijo);
+				path = buscador.buscarArchivo(null, nombre, sufijo);
+			}
 			lectorXml.leerXml(path);
 			break;
 		}
 		return true;
 	}
-	
+
+	public boolean validarPath(String path) {
+		if (path == null) {
+			return false;
+		} else
+			return true;
+	}
+
 	public String elegirArchivo(String sufijo) {
 		System.out.println("Introduce el nombre del archivo que quieres leer");
-		String nombre=lector.next();
+		String nombre = lector.next();
 		return nombre;
 	}
-	
-	
+
 }
