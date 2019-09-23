@@ -25,9 +25,9 @@ public class LectorCsv {
 		        registro.add(Arrays.asList(values));
 		    }
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("Archivo no encontrado");
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Algo ha fallado a la hora de escribir o leer tu archivo");
 		}
 		return registro;
 	}
@@ -36,10 +36,11 @@ public class LectorCsv {
 		return registro.get(0);
 	}
 	
-	public void leerCsv() {
+	public boolean leerCsv() {
 		for(List<String> linea: registro) {
 			System.out.println(linea.toString());
 		}
+		return true;
 	}
 
 	public void resumenLectura() {
