@@ -28,13 +28,18 @@ public class Buscador {
 			directorioActual = new File(".");
 		}
 		File[] filesList = directorioActual.listFiles();
-		String pathResultado="";
+		String pathResultado=null;
 		for (File f : filesList) {
-			if (f.isDirectory())
-				pathResultado += buscarArchivo(f,nombre,sufijo);
 			if (f.isFile() && (f.getName().equals(nombre+sufijo))) {
 				return f.getAbsolutePath();
 			}
+			if (f.isDirectory()) {
+				pathResultado = buscarArchivo(f,nombre,sufijo);
+				if(pathResultado!=null) {
+					return pathResultado;
+				}
+			}
+			
 		}
 		return pathResultado;
 	}

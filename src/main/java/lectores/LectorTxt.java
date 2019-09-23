@@ -63,9 +63,9 @@ public class LectorTxt {
 					System.out.println("No se ha podido crear " + f.getName());
 				}
 			}
-		} else { // el fichero existe. Mostramos el tamaño
+		} else { // el fichero existe. Mostramos el tamaï¿½o
 			System.out.println("Fichero " + f.getName() + " existe");
-			System.out.println("Tamaño " + f.length() + " bytes");
+			System.out.println("Tamaï¿½o " + f.length() + " bytes");
 		}
 	}
 
