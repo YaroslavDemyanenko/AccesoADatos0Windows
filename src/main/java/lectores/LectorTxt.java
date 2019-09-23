@@ -2,46 +2,16 @@ package lectores;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
-import java.util.Scanner;
 
 public class LectorTxt {
-	private Scanner reader = new Scanner(System.in);
-	private String entrada = "";
 	private FileReader fr = null;
 	private BufferedReader bf = null;
 	private File ruta = new File("C:/Users/in1DM3b_02/Desktop/DemosReto");
 	private File f = new File(ruta, "prueba.txt");
-
-	// Constructor del lector .txt
-//    public LectorTxt(){
-//    	try {
-//			fr = new FileReader("C:/Users/in1DM3b_02/Desktop/DemosReto/prueba.txt");
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//			}
-//        	try {
-//				while ((entrada = bf.readLine())!= null) {
-//			    	System.out.println(entrada);
-//			 	}
-//			} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			}
-//  	}
-
-	// Metodo para comprobar si existe el directorio y el archivo
+	
+	/**
 	public void Comprobacion() throws IOException {
-//    	System.out.println(f.getAbsolutePath()); //Devuelve la ruta absoluta asociada al objeto File
-//        System.out.println(f.getParent()); //Devuelve un String conteniendo el directorio padre del File. Devuelve null si no tiene directorio padre
-//        System.out.println(ruta.getAbsolutePath());
-//        System.out.println(ruta.getParent());
-
-//        entrada = reader.next();
-
 		if (!f.exists()) { // se comprueba si el fichero existe o no
 			System.out.println("Fichero " + f.getName() + " no existe");
 			if (!ruta.exists()) { // se comprueba si la ruta existe o no
@@ -68,6 +38,7 @@ public class LectorTxt {
 			System.out.println("Tama�o " + f.length() + " bytes");
 		}
 	}
+	**/
 
 	// Metodo para leer el contenido del archivo
 	public void leer(String nombreArchivo) {
@@ -93,5 +64,4 @@ public class LectorTxt {
 			}
 		}
 	}
-
 }
