@@ -27,7 +27,7 @@ public class Controlador {
 
 	public void menu() {
 		System.out.println(menuString());
-		ejecutar(leerEleccion());
+		ejecutar(leerEleccion(lector));
 	}
 
 	public String menuString() {
@@ -41,12 +41,12 @@ public class Controlador {
 		return builder.toString();
 	}
 
-	public int leerEleccion() {
+	public int leerEleccion(Scanner reader) {
 		int num = 0;
 		while (true) {
 			try {
 				while (true) {
-					num = lector.nextInt();
+					num = reader.nextInt();
 					if (num < 0 && num > 3) {
 						System.out.println("Introduce un numero entre 0 y 3");
 						continue;
@@ -66,41 +66,42 @@ public class Controlador {
 		String path = null;
 		String sufijo;
 		String nombre;
-		switch (numero) {
-		case 0:
-			System.exit(0);
-			break;
-		case 1:
-			sufijo = ".txt";
-			buscador.verArchivos(null, sufijo);
-			while (!validarPath(path)) {
-				nombre = elegirArchivo(sufijo);
-				path = buscador.buscarArchivo(null, nombre, sufijo);
+		while (true) {
+			switch (numero) {
+			case 0:
+				System.exit(0);
+				break;
+			case 1:
+				sufijo = ".txt";
+				buscador.verArchivos(null, sufijo);
+				while (!validarPath(path)) {
+					nombre = elegirArchivo(sufijo, lector);
+					path = buscador.buscarArchivo(null, nombre, sufijo);
+				}
+				lectorTxt.leer(path);
+				break;
+			case 2:
+				sufijo = ".csv";
+				buscador.verArchivos(null, sufijo);
+				while (!validarPath(path)) {
+					nombre = elegirArchivo(sufijo, lector);
+					path = buscador.buscarArchivo(null, nombre, sufijo);
+				}
+				lectorCsv.setRegistro(lectorCsv.cargarCsv(path));
+				lectorCsv.setCampos(lectorCsv.cargarCamposCsv());
+				lectorCsv.leerCsv();
+				break;
+			case 3:
+				sufijo = ".xml";
+				buscador.verArchivos(null, sufijo);
+				while (!validarPath(path)) {
+					nombre = elegirArchivo(sufijo, lector);
+					path = buscador.buscarArchivo(null, nombre, sufijo);
+				}
+				lectorXml.leerXml(path);
+				break;
 			}
-			lectorTxt.leer(path);
-			break;
-		case 2:
-			sufijo = ".csv";
-			buscador.verArchivos(null, sufijo);
-			while (!validarPath(path)) {
-				nombre = elegirArchivo(sufijo);
-				path = buscador.buscarArchivo(null, nombre, sufijo);
-			}
-			lectorCsv.setRegistro(lectorCsv.cargarCsv(path));
-			lectorCsv.setCampos(lectorCsv.cargarCamposCsv());
-			lectorCsv.leerCsv();
-			break;
-		case 3:
-			sufijo = ".xml";
-			buscador.verArchivos(null, sufijo);
-			while (!validarPath(path)) {
-				nombre = elegirArchivo(sufijo);
-				path = buscador.buscarArchivo(null, nombre, sufijo);
-			}
-			lectorXml.leerXml(path);
-			break;
 		}
-		return true;
 	}
 
 	public boolean validarPath(String path) {
@@ -110,9 +111,9 @@ public class Controlador {
 			return true;
 	}
 
-	public String elegirArchivo(String sufijo) {
+	public String elegirArchivo(String sufijo, Scanner reader) {
 		System.out.println("Introduce el nombre del archivo que quieres leer");
-		String nombre = lector.next();
+		String nombre = reader.next();
 		return nombre;
 	}
 
