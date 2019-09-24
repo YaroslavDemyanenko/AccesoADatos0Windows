@@ -8,6 +8,11 @@ public class Buscador {
 
 	}
 
+	/**
+	 * 	Desde el directorio "actual" muestra la lista de archivos que contiene el directorio + subdirectorios
+	 * @param directorioActual Directorio actual
+	 * @param sufijo Extension del archivo
+	 */
 	public void verArchivos(File directorioActual,String sufijo) {
 		if (directorioActual == null) {
 			directorioActual = new File(".");
@@ -23,6 +28,13 @@ public class Buscador {
 		}
 	}
 	
+	/**
+	 * Recibe el directorio actual, el nombre del archivo y su extension y devuelve la ruta del archivo buscado
+	 * @param directorioActual Directorio actual
+	 * @param nombre Nombre del archivo a buscar
+	 * @param sufijo Extension del archivo a buscar ("." incluido)
+	 * @return La ruta del archivo
+	 */
 	public String buscarArchivo(File directorioActual, String nombre, String sufijo) {
 		if (directorioActual == null) {
 			directorioActual = new File(".");

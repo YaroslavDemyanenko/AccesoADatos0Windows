@@ -17,6 +17,7 @@ public class LectorCsv {
 		registro = new ArrayList<>();
 	}
 	
+	//Recibe ruta del archivo y lo guarda en una matriz. Devuelve la matriz
 	public List<List<String>> cargarCsv(String path) {
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 		    String line;
@@ -32,16 +33,19 @@ public class LectorCsv {
 		return registro;
 	}
 	
+	//Coge la primera linea de la matriz que contiene el nombre de los campos
 	public List<String> cargarCamposCsv(){
 		return registro.get(0);
 	}
 	
+	//Imprime el archivo .csv
 	public void leerCsv() {
 		for(List<String> linea: registro) {
 			System.out.println(linea.toString());
 		}
 	}
 
+	//Hace un pequeño resumen del archivo
 	public void resumenLectura() {
 		StringBuilder builder=new StringBuilder();
 		builder.append("Se han leido "+(registro.size()-1)+" lineas\nLos campos son: ");
@@ -52,6 +56,7 @@ public class LectorCsv {
 		System.out.println(builder.toString());
 	}
 	
+	//Lee una linea especifica del archivo
 	public String leerPosicion(int numero) {
 		StringBuilder builder=new StringBuilder();
 		for(int i=0;i<campos.size();i++) {

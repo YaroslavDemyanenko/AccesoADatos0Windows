@@ -41,7 +41,7 @@ public class LectorTxt {
 	**/
 
 	// Metodo para leer el contenido del archivo
-	public void leer(String nombreArchivo) {
+	public boolean leer(String nombreArchivo) {
 		try {
 
 			f  = new File(nombreArchivo);
@@ -63,5 +63,6 @@ public class LectorTxt {
 				e2.printStackTrace();
 			}
 		}
+		return true;
 	}
 }
