@@ -1,2 +1,2 @@
-id:42302;titulo:Caperucita Roja;autor:Desconocido;genero:Fábula;descripcion:Una niña debe llevarle comida a su abuela pero se encuentra con un impostor
-id:28215;titulo:El retrato de Dorian Gray;autor:Oscar Wilde;genero:Ficción y novela gotica;descripcion:Una novela sobre un hombre que decide perseguir los placeres de la vida.
+isbn:42302;titulo:Caperucita Roja;autor:Desconocido;genero:Fábula;descripcion:Una niña debe llevarle comida a su abuela pero se encuentra con un impostor
+isbn:28215;titulo:El retrato de Dorian Gray;autor:Oscar Wilde;genero:Ficción y novela gotica;descripcion:Una novela sobre un hombre que decide perseguir los placeres de la vida.

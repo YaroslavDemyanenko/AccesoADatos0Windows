@@ -1,10 +1,11 @@
 package testLectores;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Arrays;
 import java.util.List;
-import static org.junit.Assert.*;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import lectores.LectorCsv;
@@ -25,14 +26,6 @@ public class TestLectorCsv {
 	public void testCargarCsvException() {
 		LectorCsv lectorTest = new LectorCsv();
 		lectorTest.cargarCsv(".");
-	}
-
-	@Test
-	public void testCargarCampos() {
-		LectorCsv lectorTest = new LectorCsv();
-		lectorTest.cargarCsv("../AccesoADatos0Windows/reto0/MOCK_DATA.csv");
-		lectorTest.cargarCamposCsv();
-	    Assert.assertNotSame(lectorTest.getCampos(), camposTest);
 	}
 	
 	@Test

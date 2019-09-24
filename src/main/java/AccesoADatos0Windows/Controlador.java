@@ -88,7 +88,6 @@ public class Controlador {
 					path = buscador.buscarArchivo(null, nombre, sufijo);
 				}
 				lectorCsv.setRegistro(lectorCsv.cargarCsv(path));
-				lectorCsv.setCampos(lectorCsv.cargarCamposCsv());
 				lectorCsv.leerCsv();
 				break;
 			case 3:
@@ -101,6 +100,7 @@ public class Controlador {
 				lectorXml.leerXml(path);
 				break;
 			}
+			numero=leerEleccion(lector);
 		}
 	}
 

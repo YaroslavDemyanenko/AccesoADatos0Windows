@@ -1,13 +1,13 @@
 <?xml version="1.0"?>  
 <Catalogo>  
-   <Libro id="345367">  
+   <Libro isbn="345367">  
       <Titulo>XML Developer's Guide</Titulo>
       <Autor>Garghentini, Davide</Autor>  
       <Genero>Computer</Genero>
       <Descripcion>An in-depth look at creating applications   
       with XML.</Descripcion>  
    </Libro>  
-   <Libro id="231234">
+   <Libro isbn="231234">
 	  <Titulo>Midnight Rain</Titulo>   
       <Autor>Garcia, Debra</Autor>  
       <Genero>Fantasy</Genero> 
