@@ -78,7 +78,7 @@ public class Controlador {
 					nombre = elegirArchivo(sufijo, lector);
 					path = buscador.buscarArchivo(null, nombre, sufijo);
 				}
-				lectorTxt.leer(path);
+				lectorTxt.cargarTxt(path);
 				break;
 			case 2:
 				sufijo = ".csv";

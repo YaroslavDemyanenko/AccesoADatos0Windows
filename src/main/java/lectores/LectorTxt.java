@@ -3,12 +3,22 @@ package lectores;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import objetos.Libro;
 
 public class LectorTxt {
+	
 	private FileReader fr = null;
 	private BufferedReader bf = null;
 	private File ruta = new File("C:/Users/in1DM3b_02/Desktop/DemosReto");
 	private File f = new File(ruta, "prueba.txt");
+	private List<Libro> registro;
+	
+	public LectorTxt() {
+		registro = new ArrayList<>();
+	}
 	
 	/**
 	public void Comprobacion() throws IOException {
@@ -41,7 +51,7 @@ public class LectorTxt {
 	**/
 
 	// Metodo para leer el contenido del archivo
-	public void leer(String nombreArchivo) {
+	public boolean cargarTxt(String nombreArchivo) {
 		try {
 
 			f  = new File(nombreArchivo);
@@ -52,6 +62,8 @@ public class LectorTxt {
 			String linea;
 			while ((linea = bf.readLine()) != null)
 				System.out.println(linea);
+				String[] values = linea.split(",");
+				registro.add(Libro.toLibro(values));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -63,5 +75,12 @@ public class LectorTxt {
 				e2.printStackTrace();
 			}
 		}
+		return true;
+	}
+	public boolean leerTxt() {
+		for(Libro libro: registro) {
+			System.out.println(libro.toString());
+		}
+		return true;
 	}
 }
