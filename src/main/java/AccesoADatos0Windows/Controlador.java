@@ -7,10 +7,12 @@ import buscador.Buscador;
 import lectores.LectorCsv;
 import lectores.LectorTxt;
 import lectores.LectorXml;
+import objetos.Libro;
 
 public class Controlador {
 	private Scanner lector;
 	private Buscador buscador;
+	private Libro metodo;
 	private LectorCsv lectorCsv;
 	private LectorTxt lectorTxt;
 	private LectorXml lectorXml;
@@ -21,7 +23,7 @@ public class Controlador {
 		lectorTxt = new LectorTxt();
 		lectorXml = new LectorXml();
 		buscador = new Buscador();
-
+		metodo = new Libro();
 		menu();
 	}
 
@@ -47,7 +49,7 @@ public class Controlador {
 			try {
 				while (true) {
 					num = reader.nextInt();
-					if (num < 0 && num > 3) {
+					if (num < 0 || num > 3) {
 						System.out.println("Introduce un numero entre 0 y 3");
 						continue;
 					} else
@@ -56,10 +58,27 @@ public class Controlador {
 				break;
 			} catch (InputMismatchException e) {
 				System.out.println("Opcion invalida, introduce el numero otra vez");
+				reader.nextLine();
 				continue;
 			}
 		}
 		return num;
+	}
+
+	public boolean escribirEleccion(Scanner reader) {
+		String respuesta = null;
+		reader.nextLine();
+		while (true) {
+			System.out.println("¿Quieres añadir un libro a este documento? (SI/NO)");
+			respuesta=reader.nextLine();
+			if (respuesta.toLowerCase().equals("s") || respuesta.toLowerCase().equals("si")) {
+				return true;
+			} else if (respuesta.toLowerCase().equals("n") || respuesta.toLowerCase().equals("no")) {
+				return false;
+			} else {
+				continue;
+			}
+		}
 	}
 
 	public boolean ejecutar(int numero) {
@@ -78,7 +97,8 @@ public class Controlador {
 					nombre = elegirArchivo(sufijo, lector);
 					path = buscador.buscarArchivo(null, nombre, sufijo);
 				}
-				lectorTxt.cargarTxt(path);
+				lectorTxt.cargarTxt(path,metodo);
+				lectorTxt.leerTxt();
 				break;
 			case 2:
 				sufijo = ".csv";
@@ -87,8 +107,12 @@ public class Controlador {
 					nombre = elegirArchivo(sufijo, lector);
 					path = buscador.buscarArchivo(null, nombre, sufijo);
 				}
-				lectorCsv.setRegistro(lectorCsv.cargarCsv(path));
+				lectorCsv.setRegistro(lectorCsv.cargarCsv(path,metodo));
 				lectorCsv.leerCsv();
+				if(escribirEleccion(lector)) {
+					lectorCsv.getRegistro().add(metodo.registrarLibro(lector));
+					lectorCsv.escribirCsv();
+				}
 				break;
 			case 3:
 				sufijo = ".xml";
@@ -100,7 +124,7 @@ public class Controlador {
 				lectorXml.leerXml(path);
 				break;
 			}
-			numero=leerEleccion(lector);
+			numero = leerEleccion(lector);
 		}
 	}
 
