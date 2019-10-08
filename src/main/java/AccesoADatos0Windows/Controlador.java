@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import buscador.Buscador;
-import lectores.LectorCsv;
+import lectores.EditorCsv;
 import lectores.LectorTxt;
 import lectores.LectorXml;
 import objetos.Libro;
@@ -13,13 +13,13 @@ public class Controlador {
 	private Scanner lector;
 	private Buscador buscador;
 	private Libro metodo;
-	private LectorCsv lectorCsv;
+	private EditorCsv lectorCsv;
 	private LectorTxt lectorTxt;
 	private LectorXml lectorXml;
 
 	public Controlador() {
 		lector = new Scanner(System.in);
-		lectorCsv = new LectorCsv();
+		lectorCsv = new EditorCsv();
 		lectorTxt = new LectorTxt();
 		lectorXml = new LectorXml();
 		buscador = new Buscador();
@@ -107,7 +107,7 @@ public class Controlador {
 					nombre = elegirArchivo(sufijo, lector);
 					path = buscador.buscarArchivo(null, nombre, sufijo);
 				}
-				lectorCsv.setRegistro(lectorCsv.cargarCsv(path,metodo));
+				lectorCsv.setRegistro(lectorCsv.cargarCsv(path));
 				lectorCsv.leerCsv();
 				if(escribirEleccion(lector)) {
 					lectorCsv.getRegistro().add(metodo.registrarLibro(lector));

@@ -29,7 +29,7 @@ public class Libro {
 				System.out.println("Introduce el ISBN (13 digitos)");
 				isbn = reader.nextLong();
 			} catch (InputMismatchException e) {
-				System.out.println("Opcion invalida, introduce un numero de 13 digitos");
+				System.out.println("Valor invalido, introduce un numero de 13 digitos");
 				continue;
 			}
 		}
@@ -45,7 +45,7 @@ public class Libro {
 		return new Libro(isbn, titulo, autor, genero, descripcion);
 	}
 
-	public Libro toLibro(String[] datos) {
+	public static Libro toLibro(String[] datos) {
 		if (datos.length == 5)
 			return new Libro(Long.parseLong(datos[0]), datos[1], datos[2], datos[3], datos[4]);
 		else

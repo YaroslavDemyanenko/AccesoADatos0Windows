@@ -7,29 +7,49 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import objetos.Libro;
 
-public class LectorCsv {
+public class EditorCsv {
 
 	private List<Libro> registro;
 	private String[] campos;
-	private String linea;
 	private String ruta;
 
-	public LectorCsv() {
+	public EditorCsv() {
 		registro = new ArrayList<>();
 	}
 
-	public List<Libro> cargarCsv(String path, Libro metodo) {
+	public List<Libro> cargarCsv(String path) {
 		ruta = path;
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-			String line=br.readLine();
-			linea=line;
-			campos=line.split(",");
+			String line = br.readLine();
+			campos = line.split(",");
 			while ((line = br.readLine()) != null) {
 				String[] values = line.split(",");
-				registro.add(metodo.toLibro(values));
+				registro.add(Libro.toLibro(values));
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Archivo no encontrado");
+		} catch (IOException e) {
+			System.out.println("Algo ha fallado a la hora de escribir o leer tu archivo");
+		}
+		return registro;
+	}
+
+	public List<Libro> cargarCsv2(String path) {
+		ruta = path;
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+			String line = br.readLine();
+			campos = line.split(",");
+			while ((line = br.readLine()) != null) {
+				StringTokenizer tokenizer = new StringTokenizer(line, ",");
+				ArrayList<String> arrayDatos = new ArrayList<String>();
+				while ((tokenizer.hasMoreTokens())) {
+					arrayDatos.add(tokenizer.nextToken());
+				}
+				registro.add(Libro.toLibro((String[]) arrayDatos.toArray()));
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Archivo no encontrado");
@@ -41,20 +61,14 @@ public class LectorCsv {
 
 	public void escribirCsv() {
 		try {
-			FileWriter csvWriter = new FileWriter(this.ruta);
-			
-			csvWriter.append(linea);
+			FileWriter csvWriter = new FileWriter(this.ruta, true);
 			csvWriter.append("\n");
-			for (int i = 0; i < registro.size(); i++) {
-				csvWriter.append(registro.get(i).toCsv());
-				csvWriter.append("\n");
-			}
+			csvWriter.append(registro.get(registro.size() - 1).toCsv());
 			csvWriter.flush();
 			csvWriter.close();
 		} catch (IOException e) {
 			System.out.println("Parece que alguien mas esta editando el archivo");
 		}
-
 	}
 
 	public Libro cargarCamposCsv() {
