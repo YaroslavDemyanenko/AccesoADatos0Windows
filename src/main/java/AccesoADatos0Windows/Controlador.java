@@ -2,7 +2,6 @@ package AccesoADatos0Windows;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import buscador.Buscador;
 import lectores.EditorCsv;
 import lectores.LectorTxt;

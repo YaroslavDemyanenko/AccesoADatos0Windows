@@ -57,6 +57,12 @@ public class Libro {
 		resultado+=this.isbn.toString()+","+this.titulo+","+this.autor+","+this.genero+","+this.descripcion;
 		return resultado;
 	}
+	
+	public String toTxt() {
+		String resultado = "";
+		resultado+=this.isbn.toString()+","+this.titulo+","+this.autor+","+this.genero+","+this.descripcion;
+		return resultado;
+	}
 
 	@Override
 	public String toString() {

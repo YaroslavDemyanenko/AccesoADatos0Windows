@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
-
 import objetos.Libro;
 
 public class EditorCsv {
@@ -72,7 +71,7 @@ public class EditorCsv {
 			csvWriter.flush();
 			csvWriter.close();
 		} catch (IOException e) {
-			System.out.println("Parece que alguien mas esta editando el archivo");
+			System.out.println("Es posible que otro usuario esté editando el archivo");
 		}
 	}
 

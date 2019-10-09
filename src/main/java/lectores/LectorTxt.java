@@ -3,9 +3,10 @@ package lectores;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import objetos.Libro;
 
 public class LectorTxt {
@@ -52,12 +53,28 @@ public class LectorTxt {
 
 	}
 
+	public void escribirTxt() {
+		
+		try {
+			
+			FileWriter txtWriter = new FileWriter(this.ruta, true);
+			txtWriter.append("\n");
+			txtWriter.append(registro.get(registro.size() - 1).toTxt());
+			txtWriter.flush();
+			txtWriter.close();
+			
+		} catch (IOException e) {
+			
+			System.out.println("Es posible que otro usuario esté editando el archivo");
+		}
+	}
 
 	public boolean leerTxt() {
+		
 		for (Libro libro : registro) {
+			
 			System.out.println(libro.toString());
 		}
 		return true;
-
 	}
 }
