@@ -107,7 +107,7 @@ public class Controlador {
 					nombre = elegirArchivo(sufijo, lector);
 					path = buscador.buscarArchivo(null, nombre, sufijo);
 				}
-				lectorCsv.setRegistro(lectorCsv.cargarCsv(path));
+				lectorCsv.setRegistro(lectorCsv.cargarCsv2(path));
 				lectorCsv.leerCsv();
 				if(escribirEleccion(lector)) {
 					lectorCsv.getRegistro().add(metodo.registrarLibro(lector));

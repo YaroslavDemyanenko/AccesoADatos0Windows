@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -44,12 +45,16 @@ public class EditorCsv {
 			String line = br.readLine();
 			campos = line.split(",");
 			while ((line = br.readLine()) != null) {
+				if(line.equals("")) {
+					continue;
+				}
 				StringTokenizer tokenizer = new StringTokenizer(line, ",");
 				ArrayList<String> arrayDatos = new ArrayList<String>();
 				while ((tokenizer.hasMoreTokens())) {
 					arrayDatos.add(tokenizer.nextToken());
 				}
-				registro.add(Libro.toLibro((String[]) arrayDatos.toArray()));
+				String[] stringArray = Arrays.copyOf(arrayDatos.toArray(), arrayDatos.size(), String[].class);
+				registro.add(Libro.toLibro(stringArray));
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Archivo no encontrado");
