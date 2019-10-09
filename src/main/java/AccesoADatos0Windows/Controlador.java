@@ -4,31 +4,32 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import buscador.Buscador;
-import lectores.LectorCsv;
+import lectores.EditorCsv;
 import lectores.LectorTxt;
 import lectores.LectorXml;
+import objetos.Libro;
 
 public class Controlador {
 	private Scanner lector;
 	private Buscador buscador;
-	private LectorCsv lectorCsv;
+	private Libro metodo;
+	private EditorCsv lectorCsv;
 	private LectorTxt lectorTxt;
 	private LectorXml lectorXml;
-	
-	
+
 	public Controlador() {
 		lector = new Scanner(System.in);
-		lectorCsv = new LectorCsv();
-		lectorTxt=new LectorTxt();
-		lectorXml=new LectorXml();
-		buscador= new Buscador();
-		
+		lectorCsv = new EditorCsv();
+		lectorTxt = new LectorTxt();
+		lectorXml = new LectorXml();
+		buscador = new Buscador();
+		metodo = new Libro();
 		menu();
 	}
-	
+
 	public void menu() {
 		System.out.println(menuString());
-		ejecutar(leerEleccion());
+		ejecutar(leerEleccion(lector));
 	}
 
 	public String menuString() {
@@ -42,13 +43,13 @@ public class Controlador {
 		return builder.toString();
 	}
 
-	public int leerEleccion() {
+	public int leerEleccion(Scanner reader) {
 		int num = 0;
 		while (true) {
 			try {
 				while (true) {
-					num = lector.nextInt();
-					if (num < 0 && num > 3) {
+					num = reader.nextInt();
+					if (num < 0 || num > 3) {
 						System.out.println("Introduce un numero entre 0 y 3");
 						continue;
 					} else
@@ -57,52 +58,87 @@ public class Controlador {
 				break;
 			} catch (InputMismatchException e) {
 				System.out.println("Opcion invalida, introduce el numero otra vez");
+				reader.nextLine();
 				continue;
 			}
 		}
 		return num;
 	}
-	
+
+	public boolean escribirEleccion(Scanner reader) {
+		String respuesta = null;
+		reader.nextLine();
+		while (true) {
+			System.out.println("¿Quieres añadir un libro a este documento? (SI/NO)");
+			respuesta=reader.nextLine();
+			if (respuesta.toLowerCase().equals("s") || respuesta.toLowerCase().equals("si")) {
+				return true;
+			} else if (respuesta.toLowerCase().equals("n") || respuesta.toLowerCase().equals("no")) {
+				return false;
+			} else {
+				continue;
+			}
+		}
+	}
+
 	public boolean ejecutar(int numero) {
-		String path;
+		String path = null;
 		String sufijo;
 		String nombre;
-		switch (numero) {
-		case 0:
-			System.exit(0);
-			break;
-		case 1:
-			sufijo=".txt";
-			buscador.verArchivos(null,sufijo);
-			nombre=elegirArchivo(sufijo);
-			path=buscador.buscarArchivo(null,nombre,sufijo);
-			lectorTxt.leer(path);
-			break;
-		case 2:
-			sufijo=".csv";
-			buscador.verArchivos(null,sufijo);
-			nombre=elegirArchivo(sufijo);
-			path=buscador.buscarArchivo(null,nombre,sufijo);
-			lectorCsv.setRegistro(lectorCsv.cargarCsv(path));
-			lectorCsv.setCampos(lectorCsv.cargarCamposCsv());
-			lectorCsv.leerCsv();
-			break;
-		case 3:
-			sufijo=".xml";
-			buscador.verArchivos(null,sufijo);
-			nombre=elegirArchivo(sufijo);
-			path=buscador.buscarArchivo(null,nombre,sufijo);
-			lectorXml.leerXml(path);
-			break;
+		while (true) {
+			switch (numero) {
+			case 0:
+				System.exit(0);
+				break;
+			case 1:
+				sufijo = ".txt";
+				buscador.verArchivos(null, sufijo);
+				while (!validarPath(path)) {
+					nombre = elegirArchivo(sufijo, lector);
+					path = buscador.buscarArchivo(null, nombre, sufijo);
+				}
+				lectorTxt.cargarTxt(path,metodo);
+				lectorTxt.leerTxt();
+				break;
+			case 2:
+				sufijo = ".csv";
+				buscador.verArchivos(null, sufijo);
+				while (!validarPath(path)) {
+					nombre = elegirArchivo(sufijo, lector);
+					path = buscador.buscarArchivo(null, nombre, sufijo);
+				}
+				lectorCsv.setRegistro(lectorCsv.cargarCsv2(path));
+				lectorCsv.leerCsv();
+				if(escribirEleccion(lector)) {
+					lectorCsv.getRegistro().add(metodo.registrarLibro(lector));
+					lectorCsv.escribirCsv();
+				}
+				break;
+			case 3:
+				sufijo = ".xml";
+				buscador.verArchivos(null, sufijo);
+				while (!validarPath(path)) {
+					nombre = elegirArchivo(sufijo, lector);
+					path = buscador.buscarArchivo(null, nombre, sufijo);
+				}
+				lectorXml.leerXml(path);
+				break;
+			}
+			numero = leerEleccion(lector);
 		}
-		return true;
 	}
-	
-	public String elegirArchivo(String sufijo) {
+
+	public boolean validarPath(String path) {
+		if (path == null) {
+			return false;
+		} else
+			return true;
+	}
+
+	public String elegirArchivo(String sufijo, Scanner reader) {
 		System.out.println("Introduce el nombre del archivo que quieres leer");
-		String nombre=lector.next();
+		String nombre = reader.next();
 		return nombre;
 	}
-	
-	
+
 }

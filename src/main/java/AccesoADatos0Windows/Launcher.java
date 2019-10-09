@@ -8,7 +8,7 @@ public class Launcher {
 		Controlador contr=new Controlador();
 		
 		
-		/**
+		/**2
 		LectorCsv lectorPrueba=new LectorCsv();
 		lectorPrueba.cargarCSV("E:/MOCK_DATA.csv");
 		lectorPrueba.resumenLectura();
