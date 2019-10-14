@@ -1,0 +1,8 @@
+<Catalogo>
+  <Libro isbn="1234567890123">
+    <Titulo>Timepos oscuros</Titulo>
+    <Autor>Unai</Autor>
+    <Genero>Fantasia</Genero>
+    <Descripcion>Tiempos muy chungos</Descripcion>
+  </Libro>
+</Catalogo>

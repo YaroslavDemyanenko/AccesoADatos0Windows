@@ -7,6 +7,7 @@ import lectores.EditorCsv;
 import lectores.LectorTxt;
 import lectores.LectorXml;
 import objetos.Libro;
+import escritores.EscritorXml;
 
 public class Controlador {
 	private Scanner lector;
@@ -15,12 +16,14 @@ public class Controlador {
 	private EditorCsv lectorCsv;
 	private LectorTxt lectorTxt;
 	private LectorXml lectorXml;
+	private EscritorXml escritorXml;
 
 	public Controlador() {
 		lector = new Scanner(System.in);
 		lectorCsv = new EditorCsv();
 		lectorTxt = new LectorTxt();
 		lectorXml = new LectorXml();
+		escritorXml = new EscritorXml();
 		buscador = new Buscador();
 		metodo = new Libro();
 		menu();
@@ -121,6 +124,9 @@ public class Controlador {
 					path = buscador.buscarArchivo(null, nombre, sufijo);
 				}
 				lectorXml.leerXml(path);
+				if(escribirEleccion(lector)) {
+					escritorXml.escribirXml(metodo.registrarLibro(lector), path);;
+				}
 				break;
 			}
 			numero = leerEleccion(lector);

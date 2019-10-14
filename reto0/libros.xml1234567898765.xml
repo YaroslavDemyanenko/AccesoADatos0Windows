@@ -1,0 +1,8 @@
+<Catalogo>
+  <Libro isbn="1234567898765">
+    <Titulo>asdfas</Titulo>
+    <Autor>asdfasd</Autor>
+    <Genero>asdfasdf</Genero>
+    <Descripcion>asdfasdf</Descripcion>
+  </Libro>
+</Catalogo>
