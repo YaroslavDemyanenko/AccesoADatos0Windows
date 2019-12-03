@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -40,7 +40,7 @@ public class EscritorXml {
 		}
 	}
 
-	public void anyadirLibrosAXml(ArrayList<Libro> libros) {
+	public void anyadirLibrosAXml(List<Libro> libros) {
 		File archivo = new File("/archivosXml/librosXmp.xml");
 
 		Document xmlEnDocument = null;

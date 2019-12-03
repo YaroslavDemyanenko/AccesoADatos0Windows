@@ -13,15 +13,15 @@ public class LectorTxt {
 	private FileReader filereader = null;
 	private BufferedReader bufferedReader = null;
 	private File archivo = null;
-	private List<Libro> registro;
+	
 
 	public LectorTxt() {
-		registro = new ArrayList<>();
+		
 	}
 
 
-	public boolean cargarTxt(String ruta,Libro metodo) {
-
+	public List<Libro> cargarTxt(String ruta,Libro metodo) {
+		List<Libro> registro=new ArrayList<Libro>();
 		try {
 
 			archivo = new File(ruta);
@@ -47,7 +47,7 @@ public class LectorTxt {
 				e2.printStackTrace();
 			}
 		}
-		return true;
+		return registro;
 
 	}
 }
