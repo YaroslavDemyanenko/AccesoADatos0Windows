@@ -1,118 +1,66 @@
 package objetos;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.Arrays;
+
+import org.jdom2.Attribute;
+import org.jdom2.Element;
 
 public class Libro {
 	private Long isbn;
 	private String titulo, autor, descripcion;
 	private String[] generos;
 
-	public Libro(Long isbn, String titulo, String autor, String descripcion,String[] generos) {
+	public Libro(Long isbn, String titulo, String autor, String descripcion) {
+		super();
 		this.isbn = isbn;
 		this.titulo = titulo;
 		this.autor = autor;
-		this.generos = generos;
 		this.descripcion = descripcion;
+	}
+
+	public Libro(Long isbn, String titulo, String autor, String descripcion, String[] generos) {
+		this.isbn = isbn;
+		this.titulo = titulo;
+		this.autor = autor;
+		this.descripcion = descripcion;
+		this.generos = generos;
 	}
 
 	public Libro() {
 
 	}
 
-	/**
-	public Libro registrarLibro(Scanner reader) {
-		Long isbn = 0l;
-		String titulo, autor, genero, descripcion;
-		System.out.println("Registra el libro rellenando los siguentes campos");
-
-		while (isbn.toString().length() != 13) {
-			try {
-				System.out.println("Introduce el ISBN (13 digitos)");
-				isbn = reader.nextLong();
-			} catch (InputMismatchException e) {
-				System.out.println("Valor invalido, introduce un numero de 13 digitos");
-				continue;
-			}
-		}
-		reader.nextLine();
-		System.out.println("Introduce el titulo");
-		titulo = reader.nextLine();
-		System.out.println("Introduce el nombre del autor");
-		autor = reader.nextLine();
-		System.out.println("Introduce el genero");
-		genero = reader.nextLine();
-		System.out.println("Introduce una descripcion del libro");
-		descripcion = reader.nextLine();
-		return new Libro(isbn, titulo, autor, genero, descripcion);
-	}
-	**/
-
-	/**
 	public Libro toLibro(String[] datos) {
-		if (datos.length == 5)
-			return new Libro(Long.parseLong(datos[0]), datos[1], datos[2], datos[3], datos[4]);
-		else
-			return new Libro();
-	}
-	
-	
-	public String toCsv() {
-		String resultado = "";
-		resultado+=this.isbn.toString()+","+this.titulo+","+this.autor+","+this.genero+","+this.descripcion;
-		return resultado;
-	}
-	
-	public String toTxt() {
-		String resultado = "";
-		resultado+=this.isbn.toString()+","+this.titulo+","+this.autor+","+this.genero+","+this.descripcion;
-		return resultado;
+		if (datos.length > 4) {
+			Libro libroNuevo = new Libro(Long.parseLong(datos[0]), datos[1], datos[2], datos[3]);
+			String[] generos = Arrays.copyOfRange(datos, 4, datos.length);
+			libroNuevo.setGeneros(generos);
+			return libroNuevo;
+		} else {
+			return null;
+		}
 	}
 
-	@Override
-	public String toString() {
-		return "Libro [isbn: " + isbn + ", titulo: " + titulo + ", autor: " + autor + ", genero: " + genero + ", descripcion: " + descripcion + "]";
+	public Element toXmlElement() {
+			Element libro = new Element("Libro");
+			libro.setAttribute(new Attribute("isbn", isbn.toString()));
+			libro.addContent(new Element("Titulo").setText(titulo));
+			libro.addContent(new Element("Autor").setText(autor));
+			libro.addContent(new Element("Descripcion").setText(descripcion));
+			Element generos = new Element("Generos");
+			for (String genero : this.generos) {
+				generos.addContent(new Element("Genero").setText(genero));
+			}
+			libro.addContent(generos);
+			return libro;
 	}
 
-	public Long getIsbn() {
-		return isbn;
+	public String[] getGeneros() {
+		return generos;
 	}
 
-	public void setIsbn(Long isbn) {
-		this.isbn = isbn;
+	public void setGeneros(String[] generos) {
+		this.generos = generos;
 	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	public String getAutor() {
-		return autor;
-	}
-
-	public void setAutor(String autor) {
-		this.autor = autor;
-	}
-
-	public String getGenero() {
-		return genero;
-	}
-
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-	**/
 
 }
