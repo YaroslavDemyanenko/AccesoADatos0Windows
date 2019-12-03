@@ -5,13 +5,14 @@ import java.util.Scanner;
 
 public class Libro {
 	private Long isbn;
-	private String titulo, autor, genero, descripcion;
+	private String titulo, autor, descripcion;
+	private String[] generos;
 
-	public Libro(Long isbn, String titulo, String autor, String genero, String descripcion) {
+	public Libro(Long isbn, String titulo, String autor, String descripcion,String[] generos) {
 		this.isbn = isbn;
 		this.titulo = titulo;
 		this.autor = autor;
-		this.genero = genero;
+		this.generos = generos;
 		this.descripcion = descripcion;
 	}
 
@@ -19,6 +20,7 @@ public class Libro {
 
 	}
 
+	/**
 	public Libro registrarLibro(Scanner reader) {
 		Long isbn = 0l;
 		String titulo, autor, genero, descripcion;
@@ -44,13 +46,16 @@ public class Libro {
 		descripcion = reader.nextLine();
 		return new Libro(isbn, titulo, autor, genero, descripcion);
 	}
+	**/
 
-	public static Libro toLibro(String[] datos) {
+	/**
+	public Libro toLibro(String[] datos) {
 		if (datos.length == 5)
 			return new Libro(Long.parseLong(datos[0]), datos[1], datos[2], datos[3], datos[4]);
 		else
 			return new Libro();
 	}
+	
 	
 	public String toCsv() {
 		String resultado = "";
@@ -108,5 +113,6 @@ public class Libro {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	**/
 
 }
