@@ -21,9 +21,8 @@ public class LectorTxt {
 
 
 	public List<Libro> cargarTxt(String ruta,Libro metodo) {
-		List<Libro> registro=new ArrayList<Libro>();
 		try {
-
+			List<Libro> registro=new ArrayList<Libro>();
 			archivo = new File(ruta);
 			filereader = new FileReader(archivo);
 			bufferedReader = new BufferedReader(filereader);
