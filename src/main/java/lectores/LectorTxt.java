@@ -35,6 +35,7 @@ public class LectorTxt {
 				}
 				registro.add(metodo.toLibro(values));
 			}
+			return registro;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -46,7 +47,6 @@ public class LectorTxt {
 				e2.printStackTrace();
 			}
 		}
-		return registro;
-
+		return null;
 	}
 }
