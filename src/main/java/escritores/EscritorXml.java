@@ -14,6 +14,7 @@ import objetos.Libro;
 
 public class EscritorXml {
 	
+	
 	public void escribirXml(Libro libro, String path) {
 		
 		try {

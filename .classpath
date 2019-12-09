@@ -7,11 +7,11 @@
 	<classpathentry kind="lib" path="librerias/mockito-all-1.8.4.jar"/>
 	<classpathentry kind="lib" path="librerias/mockito-core-2.7.22.jar"/>
 	<classpathentry kind="lib" path="librerias/powermock-mockito-release-full-1.5.4-full.jar"/>
+	<classpathentry kind="lib" path="librerias/jdom-2.0.6-contrib.jar"/>
+	<classpathentry kind="lib" path="librerias/jdom-2.0.6-javadoc.jar"/>
+	<classpathentry kind="lib" path="librerias/jdom-2.0.6-junit.jar"/>
+	<classpathentry kind="lib" path="librerias/jdom-2.0.6-sources.jar"/>
+	<classpathentry kind="lib" path="librerias/jdom-2.0.6.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Workspace_reto0/AccesoADatos0Windows/librerias/jdom-2.0.6.jar"/>
-	<classpathentry kind="lib" path="C:/Workspace_reto0/AccesoADatos0Windows/librerias/jdom-2.0.6-contrib.jar"/>
-	<classpathentry kind="lib" path="C:/Workspace_reto0/AccesoADatos0Windows/librerias/jdom-2.0.6-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Workspace_reto0/AccesoADatos0Windows/librerias/jdom-2.0.6-junit.jar"/>
-	<classpathentry kind="lib" path="C:/Workspace_reto0/AccesoADatos0Windows/librerias/jdom-2.0.6-sources.jar"/>
 	<classpathentry kind="output" path="bin/main"/>
 </classpath>

@@ -36,7 +36,7 @@ public class Controlador {
 
 	public String menuString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Lector de datos - Sprint 1\n");
+		builder.append("Lector de datos\n");
 		builder.append("Selecciona una opcion\n");
 		builder.append("1. Leer TXT\n");
 		builder.append("2. Leer CSV\n");
@@ -72,7 +72,7 @@ public class Controlador {
 		reader.nextLine();
 		while (true) {
 			System.out.println("¿Quieres añadir un libro a este documento? (SI/NO)");
-			respuesta=reader.nextLine();
+			respuesta = reader.nextLine();
 			if (respuesta.toLowerCase().equals("s") || respuesta.toLowerCase().equals("si")) {
 				return true;
 			} else if (respuesta.toLowerCase().equals("n") || respuesta.toLowerCase().equals("no")) {
@@ -99,7 +99,7 @@ public class Controlador {
 					nombre = elegirArchivo(sufijo, lector);
 					path = buscador.buscarArchivo(null, nombre, sufijo);
 				}
-				lectorTxt.cargarTxt(path,metodo);
+				lectorTxt.cargarTxt(path, metodo);
 				lectorTxt.leerTxt();
 				break;
 			case 2:
@@ -111,7 +111,7 @@ public class Controlador {
 				}
 				lectorCsv.setRegistro(lectorCsv.cargarCsv2(path));
 				lectorCsv.leerCsv();
-				if(escribirEleccion(lector)) {
+				if (escribirEleccion(lector)) {
 					lectorCsv.getRegistro().add(metodo.registrarLibro(lector));
 					lectorCsv.escribirCsv();
 				}
@@ -124,11 +124,13 @@ public class Controlador {
 					path = buscador.buscarArchivo(null, nombre, sufijo);
 				}
 				lectorXml.leerXml(path);
-				if(escribirEleccion(lector)) {
-					escritorXml.escribirXml(metodo.registrarLibro(lector), path);;
+				if (escribirEleccion(lector)) {
+					escritorXml.escribirXml(metodo.registrarLibro(lector), path);
+					;
 				}
 				break;
 			}
+			System.out.println(menuString());
 			numero = leerEleccion(lector);
 		}
 	}
